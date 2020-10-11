@@ -1,0 +1,25 @@
+{% extends "base.html" %} 
+
+{% block page_name %} All Rooms {% endblock page_name %} 
+
+{% block content %} 
+
+    {% for room in rooms %}
+        <a href="{% url "rooms:detail" room.pk %}"><h3>{{room.name}} / {{room.price}}</h3></a>
+        
+    {% endfor %} 
+    
+    <h5>
+        {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">Назад</a>
+        {% endif %}
+
+        Страница {{page_obj.number}} из {{page_obj.paginator.num_pages}}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Вперед</a>
+        {% endif %}
+
+    </h5>
+
+{% endblock content %}

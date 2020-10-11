@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_name %}
+    Вход в аккаунт
+{% endblock page_name %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+{% block content %}
+
+<form method="POST" action="{% url "users:login" %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>Войти</button>
+</form>
+    
+
+{% endblock content %}

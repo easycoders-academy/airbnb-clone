@@ -1,0 +1,44 @@
+{% extends "base.html" %} 
+
+{% block page_name %} All Rooms {% endblock page_name %} 
+
+{% block content %} 
+
+<div>
+    <h1>{{object.name}}</h1>
+    <h3>{{room.description}}</h3>
+</div>
+
+<div>
+    <h2>От: {{room.host.username}}</h2>
+    {% if room.host.superhost %}
+        (superhost)
+    {% endif %}
+
+    <h3>Удобства:</h3>
+    <ul>
+        {% for a in room.amenities.all %}
+            <li>{{a}}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Дополнительные удобства:</h3>
+    <ul>
+        {% for f in room.facilities.all %}
+            <li>{{f}}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Правила проживания:</h3>
+    <ul>
+        {% for r in room.house_rules.all %}
+            <li>{{r}}</li>
+        {% endfor %}
+    </ul>
+    
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block page_name %}
+    Поиск
+{% endblock page_name %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+{% block content %}
+    <h2>Поиск!</h2>
+
+    
+    <form method='get' action='{% url "rooms:search" %}'>
+        
+        {{form.as_p}}
+
+        <button>Найти</button>
+    </form>
+
+    <h3>Результаты поиска:</h3>
+    {% for room in rooms %}
+        <h3>{{room.name}}</h3>
+    {% endfor %}
+
+{% endblock content %}
