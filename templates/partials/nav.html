@@ -1,4 +1,13 @@
     <a href="{% url "core:home" %}">Airbnb</a>
-    <ul><li><a href="{% url "users:login" %}">Войти в аккаунт</a></li></ul>
+    <ul>
+        <li>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url "users:logout" %}">Выйти из аккаунта</a>
+            {% else %}
+                <a href="{% url "users:login" %}">Войти в аккаунт</a>
+            {% endif %}
+        </li>
+    </ul>
 
 
