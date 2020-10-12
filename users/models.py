@@ -37,6 +37,10 @@ class User(AbstractUser):
     gender = models.CharField(max_length=10, choices=GENDER_CHOISES, blank=True)
     bio = models.TextField(default="", blank=True)
     birthdate = models.DateField(blank=True, null=True)
-    language = models.CharField(choices=LANGUAGE_CHOISES, max_length=2, blank=True)
-    currency = models.CharField(max_length=3, choices=CURRENCY_CHOISES, blank=True)
+    language = models.CharField(
+        choices=LANGUAGE_CHOISES, max_length=2, blank=True, default=LANGUAGE_RUSSIAN
+    )
+    currency = models.CharField(
+        max_length=3, choices=CURRENCY_CHOISES, blank=True, default=CURRENCY_USD
+    )
     superhost = models.BooleanField(default=False)
