@@ -116,6 +116,7 @@ def github_callback(request):
                             username=email,
                             bio=bio,
                             login_method=models.User.LOGIN_GITHUB,
+                            email_verified=True,
                         )
                         user.set_unusable_password()
                         user.save()
@@ -147,5 +148,48 @@ def vk_callback(request):
         code = request.GET.get("code", None)
         client_id = os.environ.get("VK_APP_ID")
         client_secret = os.environ.get("VK_SECRET")
+        redirect_uri = f"http://127.0.0.1:8000/users/login/vk/callback"
+        if code is not None:
+            token_request = requests.get(
+                f"https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}"
+            )
+            token_json = token_request.json()
+            error = token_json.get("error", None)
+            if error is not None:
+                raise VK_Exception()
+            print(token_json)
+            access_token = token_json.get("access_token")
+            user_id = token_json.get("user_id")
+            email = token_json.get("email", None)
+            if email is None:
+                raise VK_Exception()
+            profile_request = requests.get(
+                f"https://api.vk.com/method/users.get?user_ids={user_id}&fields=first_name,last_name,photo_max_orig&access_token={access_token}&v=5.89"
+            )
+            profile_json = profile_request.json()
+            response = profile_json.get("response")[0]
+            first_name = response.get("first_name")
+            last_name = response.get("last_name")
+            profile_photo = response.get("photo_max_orig")
+            try:
+                user = models.User.objects.get(email=email)
+                if user.login_method != models.User.LOGIN_VK:
+                    raise VK_Exception()
+            except models.User.DoesNotExist:
+                user = models.User.objects.create(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    username=email,
+                    login_method=models.User.LOGIN_VK,
+                    email_verified=True,
+                )
+                user.set_unusable_password()
+                user.save()
+            login(request, user)
+            return redirect(reverse("core:home"))
+        else:
+            raise VK_Exception()
+
     except VK_Exception:
         return redirect(reverse("users:login"))
