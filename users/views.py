@@ -127,3 +127,25 @@ def github_callback(request):
             raise Github_Exception()
     except Github_Exception:
         return redirect(reverse("users:login"))
+
+
+class VK_Exception(Exception):
+    # TODO Вывести ошибку в интерфейсе
+    pass
+
+
+def vk_login(request):
+    client_id = os.environ.get("VK_APP_ID")
+    redirect_uri = f"http://127.0.0.1:8000/users/login/vk/callback"
+    return redirect(
+        f"https://oauth.vk.com/authorize?client_id={client_id}&display=page&redirect_uri={redirect_uri}&scope=email&response_type=code&v=5.124"
+    )
+
+
+def vk_callback(request):
+    try:
+        code = request.GET.get("code", None)
+        client_id = os.environ.get("VK_APP_ID")
+        client_secret = os.environ.get("VK_SECRET")
+    except VK_Exception:
+        return redirect(reverse("users:login"))
