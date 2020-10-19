@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from . import models
 
 
@@ -19,29 +20,19 @@ class LoginForm(forms.Form):
             self.add_error("email", forms.ValidationError("Пользователь не существует"))
 
 
-class SignUpForm(forms.ModelForm):
+class SignUpForm(UserCreationForm):
+    username = forms.EmailField(label="Email")
+
     class Meta:
         model = models.User
-        fields = ["first_name", "last_name", "email"]
+        fields = ("username", "first_name", "last_name")
 
-    password = forms.CharField(widget=forms.PasswordInput, label="Пароль")
-    password1 = forms.CharField(
-        widget=forms.PasswordInput, label="Подтверждение пароля"
-    )
-
-    def clean_password1(self):
-        password = self.cleaned_data.get("password")
-        password1 = self.cleaned_data.get("password1")
-
-        if password != password1:
-            raise forms.ValidationError("Пароли не совпадают")
-        else:
-            return password
-
-    def save(self, *args, **kwargs):
+    def save(self, commit=True):
         user = super().save(commit=False)
-        username = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("password")
-        user.username = username
-        user.set_password(password)
-        user.save()
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
+        user.email = self.cleaned_data["username"]
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
