@@ -5,6 +5,7 @@ from django.views.generic import FormView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
+from django.core.files.base import ContentFile
 from . import forms, models
 
 
@@ -157,7 +158,6 @@ def vk_callback(request):
             error = token_json.get("error", None)
             if error is not None:
                 raise VK_Exception()
-            print(token_json)
             access_token = token_json.get("access_token")
             user_id = token_json.get("user_id")
             email = token_json.get("email", None)
@@ -186,6 +186,11 @@ def vk_callback(request):
                 )
                 user.set_unusable_password()
                 user.save()
+                if profile_photo is not None:
+                    photo_request = requests.get(profile_photo)
+                    user.avatar.save(
+                        f"{user_id}-avatar", ContentFile(photo_request.content)
+                    )
             login(request, user)
             return redirect(reverse("core:home"))
         else:
