@@ -5,3 +5,11 @@
 .search-box {
   transition: box-shadow 0.15s linear;
 }
+
+.navlink {
+  @apply ml-8 rounded-full p-3;
+
+  &:hover {
+    @apply bg-gray-100;
+  }
+}
