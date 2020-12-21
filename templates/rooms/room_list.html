@@ -14,18 +14,40 @@
             {% endfor %} 
         </div>
         
-        <h5>
+        <div class="flex items-center justify-center mx-auto text-sm font-medium paginator">
             {% if page_obj.has_previous %}
-                <a href="?page={{page_obj.previous_page_number}}">Назад</a>
+                <a href="?page={{page_obj.previous_page_number}}"><i class="fas fa-chevron-left"></i></a>
+            {% else %}
+                <span class="disabled text-gray-500"><i class="fas fa-chevron-left"></i></span>
             {% endif %}
 
-            Страница {{page_obj.number}} из {{page_obj.paginator.num_pages}}
+            
+            {% if page_obj.number > 2 %}
+                <a href="?page=1">1</a> ...
+            {% endif %}
+                
+
+            {% for page in page_obj.paginator.page_range %}
+                
+                {% if page == page_obj.number %}
+                    <span class="active disabled">{{page}}</span>
+                {% elif page > page_obj.number|add:'-2' and page < page_obj.number|add:'2'  %}
+                    <a href="?page={{page}}">{{page}}</a>
+                {% endif %}
+                    
+            {% endfor %}
+             
+            {% if page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+                ... <a href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}}</a>
+            {% endif %}
 
             {% if page_obj.has_next %}
-                <a href="?page={{page_obj.next_page_number}}">Вперед</a>
+                <a href="?page={{page_obj.next_page_number}}"><i class="fas fa-chevron-right"></i></a>
+            {% else %}
+                <span class="disabled text-gray-500"><i class="fas fa-chevron-right"></i></span>
             {% endif %}
 
-        </h5>
+        </div>
     </div>
 
 {% endblock content %}

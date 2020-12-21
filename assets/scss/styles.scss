@@ -13,3 +13,15 @@
     @apply bg-gray-100;
   }
 }
+
+.paginator > * {
+  @apply flex w-8 h-8 items-center justify-center mx-2 rounded-full;
+
+  &:not(.disabled):hover {
+    @apply bg-gray-100;
+  }
+}
+
+.paginator > .active {
+  @apply bg-black text-white;
+}
