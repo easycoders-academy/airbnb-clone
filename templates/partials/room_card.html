@@ -1,8 +1,14 @@
 <div class="w-1/4 mb-10 p-2">
 
     <a href="{% url "rooms:detail" room.pk %}">
-        <div class="w-full h-48 bg-cover bg-center rounded-lg" style="background-image: url({{room.first_photo}})"></div>
-        {{room.name}} / {{room.price}}
+        {% if room.host.superhost %}
+            <span class="uppercase text-xs font-bold absolute bg-white m-2 px-2 py-1 border-gray-700 border-1/2 rounded shadow-md">суперхозяин</span>
+        {% endif %}
+        <div class="w-full h-48 bg-cover bg-center rounded-lg mb-2" style="background-image: url({{room.first_photo}})"></div>
+        <div class="mb-1 text-sm"><i class="fas fa-star text-red-500 text-xs"></i> {{room.total_rating}} <span class="text-gray-600">({{room.reviews.count}})</span></div>
+        <div>{{room.room_type}} · {{room.city}}</div>
+        <div>{{room.name}}</div>
+        <div class="mt-1">{{room.price}}</div>
     </a>
 
 </div>
