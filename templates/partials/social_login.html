@@ -1,5 +1,9 @@
-<div>
-    <a href="{% url "users:github-login" %}">Войти через Github</a>
+<div class="flex flex-col w-full">
+    <a href="{% url "users:github-login" %}" class="w-full border border-gray-700 font-medium text-gray-700 text-center rounded-sm py-5 mb-2">
+        <i class="fab fa-github mr-2 fa-lg"></i> Войти через Github
+    </a>
 
-    <a href="{% url "users:vk-login" %}">Войти через VK</a>
+    <a href="{% url "users:vk-login" %}" class="w-full border border-blue-700 font-medium text-white text-center rounded-sm py-5 mb-2 bg-blue-500">
+        <i class="fab fa-vk mr-2 fa-lg"></i> Войти через VK
+    </a>
 </div>
