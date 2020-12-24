@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 .search-box {
   transition: box-shadow 0.15s linear;
@@ -25,3 +24,17 @@
 .paginator > .active {
   @apply bg-black text-white;
 }
+
+.btn {
+  @apply text-center rounded-lg py-3 text-sm font-medium w-full;
+}
+
+.input {
+  @apply rounded-lg w-full text-left border border-gray-500 px-2 py-4 font-normal text-base;
+
+  &:focus {
+    @apply outline-none border-black;
+  }
+}
+
+@tailwind utilities;
