@@ -29,7 +29,7 @@
   @apply text-center rounded-lg py-3 text-sm font-medium w-full;
 }
 
-.input {
+input {
   @apply rounded-lg w-full text-left border border-gray-500 px-2 py-4 font-normal text-base;
 
   &:focus {

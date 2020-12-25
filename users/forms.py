@@ -4,8 +4,16 @@ from . import models
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={"class": "rounded-b-none", "placeholder": "Email"}
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "mb-4 rounded-t-none", "placeholder": "Пароль"}
+        )
+    )
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -21,11 +29,34 @@ class LoginForm(forms.Form):
 
 
 class SignUpForm(UserCreationForm):
-    username = forms.EmailField(label="Email")
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "rounded-t-none rounded-b-none", "placeholder": "Пароль"}
+        )
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "rounded-t-none mb-4", "placeholder": "Повторите пароль"}
+        )
+    )
 
     class Meta:
         model = models.User
         fields = ("username", "first_name", "last_name")
+        widgets = {
+            "username": forms.EmailInput(
+                attrs={"class": "rounded-t-none rounded-b-none", "placeholder": "Email"}
+            ),
+            "first_name": forms.TextInput(
+                attrs={"class": "rounded-b-none", "placeholder": "Введите имя"}
+            ),
+            "last_name": forms.TextInput(
+                attrs={
+                    "class": "rounded-b-none rounded-t-none",
+                    "placeholder": "Введите фамилию",
+                }
+            ),
+        }
 
     def save(self, commit=True):
         user = super().save(commit=False)
