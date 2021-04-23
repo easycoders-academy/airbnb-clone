@@ -37,4 +37,17 @@ input {
   }
 }
 
+form {
+  .input {
+    &.has_error {
+      input {
+        @apply border-red-700 bg-red-200;
+        &:focus {
+          @apply border-red-700 bg-transparent;
+        }
+      }
+    }
+  }
+}
+
 @tailwind utilities;
