@@ -75,7 +75,6 @@ class Github_Exception(Exception):
 def github_callback(request):
     try:
         client_id = os.environ.get("GH_ID")
-        raise Github_Exception()
         client_secret = os.environ.get("GH_SECRET")
         code = request.GET.get("code", None)
         if code is not None:
@@ -86,7 +85,7 @@ def github_callback(request):
             result_json = result.json()
             error = result_json.get("error", None)
             if error is not None:
-                raise Github_Exception()
+                raise Github_Exception("Не получилось получить токен авторизации")
             else:
                 access_token = result_json.get("access_token")
                 profile_request = requests.get(
@@ -105,7 +104,9 @@ def github_callback(request):
                     try:
                         user = models.User.objects.get(email=email)
                         if user.login_method != models.User.LOGIN_GITHUB:
-                            raise Github_Exception()
+                            raise Github_Exception(
+                                f"Пожалуйста, войдите через: {user.login_method}"
+                            )
                     except models.User.DoesNotExist:
                         user = models.User.objects.create(
                             email=email,
@@ -118,13 +119,16 @@ def github_callback(request):
                         user.set_unusable_password()
                         user.save()
                     login(request, user)
+                    messages.success(request, f"С возвращением, {user.first_name}")
                     return redirect(reverse("core:home"))
                 else:
-                    raise Github_Exception()
+                    raise Github_Exception(
+                        "Пожалуйста, разрешите доступ к названию аккаунта"
+                    )
         else:
             raise Github_Exception()
-    except Github_Exception:
-        messages.error(request, "Что-то пошло не так")
+    except Github_Exception as e:
+        messages.error(request, e)
         return redirect(reverse("users:login"))
 
 
@@ -154,12 +158,12 @@ def vk_callback(request):
             token_json = token_request.json()
             error = token_json.get("error", None)
             if error is not None:
-                raise VK_Exception()
+                raise VK_Exception("Не получилось получить токен авторизации")
             access_token = token_json.get("access_token")
             user_id = token_json.get("user_id")
             email = token_json.get("email", None)
             if email is None:
-                raise VK_Exception()
+                raise VK_Exception("Пожалуйста, разрешите доступ к электронной почте")
             profile_request = requests.get(
                 f"https://api.vk.com/method/users.get?user_ids={user_id}&fields=first_name,last_name,photo_max_orig&access_token={access_token}&v=5.89"
             )
@@ -171,7 +175,9 @@ def vk_callback(request):
             try:
                 user = models.User.objects.get(email=email)
                 if user.login_method != models.User.LOGIN_VK:
-                    raise VK_Exception()
+                    raise VK_Exception(
+                        f"Пожалуйста, войдите через: {user.login_method}"
+                    )
             except models.User.DoesNotExist:
                 user = models.User.objects.create(
                     email=email,
@@ -189,9 +195,11 @@ def vk_callback(request):
                         f"{user_id}-avatar", ContentFile(photo_request.content)
                     )
             login(request, user)
+            messages.success(request, f"С возвращением, {user.first_name}")
             return redirect(reverse("core:home"))
         else:
-            raise VK_Exception()
+            raise VK_Exception("Не получилось получить токен авторизации")
 
-    except VK_Exception:
+    except VK_Exception as e:
+        messages.error(request, e)
         return redirect(reverse("users:login"))
