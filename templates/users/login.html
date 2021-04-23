@@ -13,12 +13,7 @@
 
     {% include 'partials/social_login.html' %}
 
-    <form method="POST" action="{% url "users:login" %}" class="w-full">
-        {% csrf_token %}
-        {{form.email}}
-        {{form.password}}
-        <button class="btn bg-red-500 text-white">Войти</button>
-    </form>
+    {% include 'mixins/auth/auth_form.html' with form=form CTA="Войти" %}
 
     <div class="text-sm text-left w-full mt-4">
         <span>Не зарегистрированы на Airbnb?</span> <a href="{% url 'users:signup' %}" class="font-medium underline">Зарегистрироваться</a>
