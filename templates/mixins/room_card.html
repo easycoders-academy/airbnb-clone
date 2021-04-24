@@ -1,5 +1,3 @@
-<div class="w-1/4 mb-10 p-2">
-
     <a href="{% url "rooms:detail" room.pk %}">
         {% if room.host.superhost %}
             <span class="uppercase text-xs font-bold absolute bg-white m-2 px-2 py-1 border-gray-700 border-1/2 rounded shadow-md">суперхозяин</span>
@@ -10,5 +8,3 @@
         <div class="truncate">{{room.name}}</div>
         <div class="mt-1"><span class="font-bold">{{room.price}} $</span> за ночь</div>
     </a>
-
-</div>

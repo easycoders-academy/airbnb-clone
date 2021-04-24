@@ -9,8 +9,9 @@
 
         <div class="flex flex-wrap">
             {% for room in rooms %}
-                {% include 'mixins/room_card.html' with room=room %}
-                
+                <div class="w-1/4 mb-10 p-2">
+                    {% include 'mixins/room_card.html' with room=room %}
+                </div>
             {% endfor %} 
         </div>
         

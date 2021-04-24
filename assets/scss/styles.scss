@@ -89,4 +89,15 @@ form {
   }
 }
 
+.btn__link {
+  @apply font-medium text-sm underline;
+}
+
+.user__info {
+  @apply py-5 flex flex-col border-b border-gray-400;
+  .user__header {
+    @apply text-2xl font-medium py-5;
+  }
+}
+
 @tailwind utilities;
