@@ -50,4 +50,43 @@ form {
   }
 }
 
+@keyframes messagesFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  5% {
+    opacity: 1;
+    transform: translateY(80px);
+  }
+  95% {
+    opacity: 1;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px);
+    display: none;
+  }
+}
+
+.message__container {
+  animation: messagesFadeIn 5s ease-in-out forwards;
+}
+
+.message {
+  &.error {
+    @apply bg-red-600;
+  }
+  &.info {
+    @apply bg-blue-500;
+  }
+  &.success {
+    @apply bg-green-500;
+  }
+  &.warning {
+    @apply bg-yellow-400;
+  }
+}
+
 @tailwind utilities;
