@@ -30,7 +30,7 @@
         <span class="text-3xl font-semibold">Здравствуйте, меня зовут {{user.first_name}}!</span>
         <span class="text-gray-600 text-sm">На Airbnb с {{user.date_joined|date:'Y'}}</span>
         
-        {% if user.login_method == 'Email' %}
+        {% if user.login_method == 'email' %}
             <a href="{% url 'users:password' %}" class="btn__link mt-2">Изменить пароль</a>
         {% endif %}
             
