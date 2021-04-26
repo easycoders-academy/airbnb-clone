@@ -228,6 +228,30 @@ class UpdateProfileView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["birthdate"].widget.attrs = {"placeholder": "Дата рождения"}
+        form.fields["first_name"].widget.attrs = {"placeholder": "Введите имя"}
+        form.fields["last_name"].widget.attrs = {"placeholder": "Введите фамилию"}
+        form.fields["gender"].widget.attrs = {"placeholder": "Пол"}
+        form.fields["bio"].widget.attrs = {"placeholder": "Короткая информация о себе"}
+        form.fields["language"].widget.attrs = {"placeholder": "Родной язык"}
+        form.fields["currency"].widget.attrs = {"placeholder": "Валюта"}
+        return form
+
 
 class UpdatePasswordView(PasswordChangeView):
     template_name = "users/update-password.html"
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["old_password"].widget.attrs = {
+            "placeholder": "Введите текущий пароль"
+        }
+        form.fields["new_password1"].widget.attrs = {
+            "placeholder": "Введите новый пароль"
+        }
+        form.fields["new_password2"].widget.attrs = {
+            "placeholder": "Повторите новый пароль"
+        }
+        return form

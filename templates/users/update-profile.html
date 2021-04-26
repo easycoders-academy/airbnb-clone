@@ -36,7 +36,7 @@
             
         <div class="user__info">
             <h2 class="user__header">Информация</h2>
-            <form method="POST" class="w-full" enctype="multipart/form-data">
+            <form method="POST" class="w-full space-y-2" enctype="multipart/form-data">
                 {% csrf_token %}
                 
                 {% if form.non_field_errors %}
