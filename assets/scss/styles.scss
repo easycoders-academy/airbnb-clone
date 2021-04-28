@@ -111,4 +111,13 @@ form {
   }
 }
 
+.room__host__avatar {
+  div {
+    @apply w-12 h-12;
+    span {
+      @apply text-xl;
+    }
+  }
+}
+
 @tailwind utilities;
