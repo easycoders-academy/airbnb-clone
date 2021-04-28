@@ -26,7 +26,7 @@
 
     <div class="container w-full flex justify-between">
         <div class="w-3/5 flex flex-col">
-            <div class="flex flex-row w-full py-5 border-gray-400 border-b">
+            <div class="flex-row room__section">
                 <div class="flex flex-col w-2/3">
                     <h3 class="font-medium text-xl">{{room.room_type}}, хозяин: {{room.host.first_name}}</h3>
                     <span>{{room.guests}} гостей · {{room.beds}} кроватей · {{room.bathrooms}} ванных комнат</span>
@@ -35,6 +35,51 @@
                     <a href="{{room.host.get_absolute_url}}" class="room__host__avatar">
                         {% include 'mixins/user_avatar.html' with user=room.host %}
                     </a>
+                </div>
+            </div>
+            <div class="room__section space-y-2">
+                
+                {% for facility in room.facilities.all %}
+                    <span class="font-medium text-base"><i class="fas fa-check mr-8 text-xl"></i> {{facility}}</span>
+                {% endfor %}
+                    
+            </div>
+
+            <div class="room__section">
+                <span>{{room.description}}</span>
+                <a href="#" class="btn__link text-base my-5">Связаться с хозяином</a>
+            </div>
+
+            <div class="room__section">
+                <h4 class="room__section__title">Удобства</h4>
+                <div class="grid grid-cols-2 grid-rows-5">
+                    
+                    {% for a in room.amenities.all %}
+                        <span>{{a}}</span>
+                    {% endfor %}
+                        
+                </div>
+            </div>
+
+            <div class="room__section">
+                
+                {% if room.reviews.count > 0 %}
+                    <h4 class="room__section__title"><i class="fas fa-star"></i> {{room.total_rating}} ({{room.reviews.count}} отзывов)</h4>
+                {% else %}
+                    <h4 class="room__section__title">Отзывов пока нет</h4>
+                {% endif %}
+                    
+                
+            </div>
+
+            <div class="room__section">
+                <h4 class="room__section__title">Важная информация</h4>
+                <div class="grid grid-cols-2 grid-rows-5">
+                    
+                    {% for hr in room.house_rules.all %}
+                        <span>{{hr}}</span>
+                    {% endfor %}
+                        
                 </div>
             </div>
         </div>

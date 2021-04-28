@@ -111,6 +111,13 @@ form {
   }
 }
 
+.room__section {
+  @apply flex flex-col w-full border-gray-400 border-b py-5;
+  .room__section__title {
+    @apply text-xl font-medium py-5;
+  }
+}
+
 .room__host__avatar {
   div {
     @apply w-12 h-12;
