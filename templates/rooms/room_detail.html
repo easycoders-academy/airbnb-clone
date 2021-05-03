@@ -61,7 +61,13 @@
                 </div>
             </div>
         </div>
-        <div class="w-2/5"></div>
+        <div class="w-2/5 ml-5 pt-5">
+            
+            {% if room.host == user %}
+                <a href="{% url 'rooms:edit' room.pk %}" class="btn bg-red-500 text-white block">Редактировать комнату</a>
+            {% endif %}
+                
+        </div>
     </div>
     <div class="room__section">
                 
