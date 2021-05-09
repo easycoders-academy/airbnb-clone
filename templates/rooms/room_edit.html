@@ -20,7 +20,7 @@
                     </a>
                 </div>
             </div>
-            <a class="btn__link mt-2" href="#">Редактировать фотографии</a>
+            <a class="btn__link mt-2" href="{% url 'rooms:photos' room.pk %}">Редактировать фотографии</a>
             {% include 'mixins/room/room_form.html' with form=form CTA="Сохранить комнату" %}
             
         </div>

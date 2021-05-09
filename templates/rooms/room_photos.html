@@ -1,0 +1,31 @@
+{% extends "base.html" %} 
+
+{% block page_name %} Фотографии {{room.name}} {% endblock page_name %} 
+
+{% block content %}
+<div class="container  max-w-full px-40 mb-10">
+    <h1 class="text-2xl font-semibold my-4">Редактировать фотографии</h1>
+    
+    <div class="container w-full flex justify-between">
+        <div class="w-full flex flex-col">
+            
+            <div class="grid grid-cols-1 gap-y-5">
+                {% for photo in room.photos.all %}
+                    <div class="border border-gray-400 p-6 flex flex-row justify-between">
+                        <div class="flex flex-row items-start ">
+                            <img src="{{photo.file.url}}" alt="" class="w-32 h-32">
+                            <span class="ml-5 text-xl">{{photo.caption}}</span>
+                        </div>
+                        <div class="flex flex-col w-1/5">
+                            <a class="btn bg-teal-500 text-white mb-5" href="#">Редактировать</a>
+                            <a class="btn bg-red-500 text-white" href="#">Удалить</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
