@@ -8,7 +8,9 @@
     
     <div class="container w-full flex justify-between">
         <div class="w-full flex flex-col">
-            
+            <div class="flex justify-center mb-5">
+                <a href="{% url 'rooms:edit' room.pk %}" class="btn__link">Назад к странице жилья</a>
+            </div>
             <div class="grid grid-cols-1 gap-y-5">
                 {% for photo in room.photos.all %}
                     <div class="border border-gray-400 p-6 flex flex-row justify-between">
@@ -17,7 +19,7 @@
                             <span class="ml-5 text-xl">{{photo.caption}}</span>
                         </div>
                         <div class="flex flex-col w-1/5">
-                            <a class="btn bg-teal-500 text-white mb-5" href="#">Редактировать</a>
+                            <a class="btn bg-teal-500 text-white mb-5" href="{% url 'rooms:edit-photo' room_pk=room.pk photo_pk=photo.pk %}">Редактировать</a>
                             <a class="btn bg-red-500 text-white" href="{% url 'rooms:delete-photo' room_pk=room.pk photo_pk=photo.pk %}">Удалить</a>
                         </div>
                     </div>
