@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+
+{% block page_name %} Загрузка фотографии {% endblock page_name %} 
+
+{% block content %}
+<div class="container  max-w-full px-40 mb-10">
+    <h1 class="text-2xl font-semibold my-4">Загрузка фотографии</h1>
+
+    <div class="container w-full flex justify-between">
+        <div class="w-full flex flex-col">
+            {% include 'mixins/room/room_form.html' with form=form CTA="Загрузить фото" %}
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

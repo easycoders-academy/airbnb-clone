@@ -8,8 +8,9 @@
     
     <div class="container w-full flex justify-between">
         <div class="w-full flex flex-col">
-            <div class="flex justify-center mb-5">
+            <div class="flex justify-between mb-5">
                 <a href="{% url 'rooms:edit' room.pk %}" class="btn__link">Назад к странице жилья</a>
+                <a href="{% url 'rooms:add-photo' room.pk %}" class="btn bg-red-500 text-white w-1/6">Загрузить фото</a>
             </div>
             <div class="grid grid-cols-1 gap-y-5">
                 {% for photo in room.photos.all %}
