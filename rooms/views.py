@@ -184,4 +184,5 @@ class AddPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, FormView):
     def form_valid(self, form):
         pk = self.kwargs.get("pk")
         form.save(pk)
-        return None
+        messages.success(self.request, "Фотография добавлена")
+        return redirect(reverse("rooms:photos", kwargs={"pk": pk}))
