@@ -191,5 +191,6 @@ class CreateRoomView(user_mixins.LoggedInOnlyView, FormView):
         room = form.save()
         room.host = self.request.user
         room.save()
+        form.save_m2m()
         messages.success(self.request, "Жилье размещено")
         return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))
