@@ -1,4 +1,5 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+{% load capitals %} 
 
 {% block page_name %} All Rooms {% endblock page_name %} 
 
@@ -66,11 +67,12 @@
             {% if room.host == user %}
                 <a href="{% url 'rooms:edit' room.pk %}" class="btn bg-red-500 text-white block">Редактировать комнату</a>
             {% else %}
+                {{'какая-то строка'|capitals}}
                 {% if not request.session.is_hosting %}
                     
                     {% for calendar in room.get_calendars %}
                     <div class="mb-20">
-                        <span class="font-medium text-lg text-center block mb-8">{{calendar.get_month}} {{calendar.year}}</span>
+                        <span class="font-medium text-lg text-center block mb-8">{{calendar.get_month|lower}} {{calendar.year}}</span>
                         
                         <div class="grid grid-cols-7 mb-4 gap-5 justify-items-center">
                             {% for day in calendar.day_names %}
