@@ -4,13 +4,16 @@ from django.utils import timezone
 from core import models as core_models
 
 
-class BoookedDay(core_models.TimeStampedModel):
+class BookedDay(core_models.TimeStampedModel):
     day = models.DateField()
     reservation = models.ForeignKey("Reservation", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Booked Day"
         verbose_name_plural = "Booked Days"
+
+    def __str__(self):
+        return str(self.day)
 
 
 class Reservation(core_models.TimeStampedModel):
@@ -54,7 +57,7 @@ class Reservation(core_models.TimeStampedModel):
             start = self.check_in
             end = self.check_out
             difference = end - start
-            existing_booked_day = BoookedDay.objects.filter(
+            existing_booked_day = BookedDay.objects.filter(
                 day__range=(start, end)
             ).exists()
 
@@ -62,7 +65,7 @@ class Reservation(core_models.TimeStampedModel):
                 super().save(*args, **kwargs)
                 for i in range(difference.days + 1):
                     day = start + datetime.timedelta(days=i)
-                    BoookedDay.objects.create(day=day, reservation=self)
+                    BookedDay.objects.create(day=day, reservation=self)
                 return
 
         return super().save(*args, **kwargs)
