@@ -87,7 +87,7 @@
                                     {% elif is_booked_bool %}
                                         <span class="font-medium text-sm w-10 h-10 p-1 text-center text-gray-500"><s>{{day}}</s></span>
                                     {% else %}
-                                    <span class="font-medium text-sm w-10 h-10 p-1 text-center rounded-full border border-transparent hover:border-black cursor-pointer">{{day}}</span>
+                                        <a href="{% url 'reservations:create' room.pk day.year day.month day.day %}" class="font-medium text-sm w-10 h-10 p-1 text-center rounded-full border border-transparent hover:border-black cursor-pointer">{{day}}</a>
                                     {% endif %}
                                         
                                 {% else %}
