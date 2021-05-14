@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block page_name %} Информация о бронировании {% endblock page_name %} 
+
+{% block content %}
+
+<div class="grid grid-cols-2 mb-10">
+    <div class="flex flex-col min-w-full">
+        <div class="flex flex-row w-full justify-around py-5 border-b border-gray-300">
+            <a href="{% url 'rooms:detail' reservation.room.pk %}"><i class="fas fa-arrow-left text-xl"></i></a>
+            <span class="w-4/5 text-center font-medium">Бронирования жилья</span>
+        </div>
+        <div class="flex flex-col px-5">
+            <div class="flex flex-col border-b border-gray-300 py-5">
+                <div class="flex flex-row">
+                    <span class="text-gray-600">{{reservation.room.city}} · {{reservation.check_in}} - {{reservation.check_out}}</span>
+                </div>
+                <h2 class="text-3xl font-medium">
+                    
+                    {% if reservation.status == 'pending' %}
+                        Ожидание подтверждения
+                    {% endif %}
+                        
+                </h2>
+            </div>
+            <div class="py-5 flex flex-col border-b border-gray-300">
+                <div class="min-w-full bg-cover bg-center mr-2 rounded-xl" style="background-image: url('{{reservation.room.first_photo}}'); height:300px"></div>
+                <h1 class="text-xl font-medium mt-5"><a href="{% url 'rooms:detail' reservation.room.pk %}">{{reservation.room.name}}</a></h1>
+            </div>
+            <div class="grid grid-cols-2 py-5 border-b border-gray-300">
+                <div class="flex flex-col px-5 border-r border-gray-300">
+                    <span class="font-medium">Прибытие</span>
+                    <span>{{reservation.check_in}}</span>
+                </div>
+                <div class="flex flex-col px-5">
+                    <span class="font-medium">Выезд</span>
+                    <span>{{reservation.check_out}}</span>
+                </div>
+            </div>
+            <div class="flex flex-col p-5 border-b border-gray-300">
+                <span class="font-medium">Общее описание</span>
+                <div class="flex flex-row justify-between mt-2">
+                    <div class="flex flex-col">
+                        <span>Хозяин: <a class="font-medium underline text-gray-600" href="{% url 'users:profile' reservation.room.host.pk %}">{{reservation.room.host}}</a></span>
+                        <span>{{reservation.room.room_type}} · {{reservation.room.guests}} гостей</span>
+                        <span>{{reservation.room.price}}</span>
+                    </div>
+                    <div class="flex justify-end room__host__avatar">
+                        {% include 'mixins/user_avatar.html' with user=reservation.room.host %}
+                    </div>
+                </div>
+            </div>
+            <div class="flex p-5 border-b border-gray-300">
+                <a href="#"><i class="fas fa-comment mr-5"></i> Написать хозяину</a>
+            </div>
+            <div class="flex p-5 border-b border-gray-300">
+                <a href="#"><i class="fas fa-times mr-5"></i></i> Отменить бронирование</a>
+            </div>
+        </div>
+    </div>
+    <div class="min-w-full min-h-screen bg-gray-400" id="map"></div>
+</div>
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=1f7d3522-00a9-4d8f-8bd0-76e2f4dd1f7d" type="text/javascript"></script>
+<script>
+    var myMap;
+
+    // Дождёмся загрузки API и готовности DOM.
+    ymaps.ready(init);
+
+    function init () {
+        // Создание экземпляра карты и его привязка к контейнеру с
+        // заданным id ("map").
+        myMap = new ymaps.Map('map', {
+            // При инициализации карты обязательно нужно указать
+            // её центр и коэффициент масштабирования.
+            center: [55.76, 37.64], // Москва
+            zoom: 10
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+
+    }
+</script>
+
+{% endblock %}
