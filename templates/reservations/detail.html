@@ -50,12 +50,12 @@
             
             {% if reservation.status == 'pending' %}
                 <div class="flex p-5 border-b border-gray-300">
-                    <a href="#"><i class="fas fa-times mr-5"></i> Отменить бронирование</a>
+                    <a href="{% url 'reservations:edit' reservation.pk 'cancel' %}"><i class="fas fa-times mr-5"></i> Отменить бронирование</a>
                 </div>
                 
                 {% if user == reservation.room.host %}
                     <div class="flex p-5 border-b border-gray-300">
-                        <a href="#"><i class="fas fa-check mr-5"></i> Подтвердить бронирование</a>
+                        <a href="{% url 'reservations:edit' reservation.pk 'confirm' %}"><i class="fas fa-check mr-5"></i> Подтвердить бронирование</a>
                     </div>
                 {% endif %}
                     

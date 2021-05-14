@@ -44,3 +44,19 @@ class ReservationDetailView(View):
         return render(
             self.request, "reservations/detail.html", {"reservation": reservation}
         )
+
+
+def edit_reservation(request, pk, action):
+    reservation = models.Reservation.objects.get_or_none(pk=pk)
+    if not reservation:
+        raise Http404()
+    if request.user != reservation.guest and request.user != reservation.room.host:
+        raise Http404()
+    if action == "confirm":
+        reservation.status = models.Reservation.STATUS_CONFIRMED
+    elif action == "cancel":
+        reservation.status = models.Reservation.STATUS_CANCELED
+        models.BookedDay.objects.filter(reservation=reservation).delete()
+    reservation.save()
+    messages.success(request, "Бронирование обновлено")
+    return redirect(reverse("reservations:detail", kwargs={"pk": pk}))

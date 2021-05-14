@@ -83,6 +83,7 @@ form {
 
 .message__container {
   animation: messagesFadeIn 5s ease-in-out forwards;
+  z-index: 9999;
 }
 
 .message {
