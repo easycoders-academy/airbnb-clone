@@ -5,6 +5,7 @@ from django.contrib import messages
 from rooms import models as room_models
 from . import models
 from django.shortcuts import render, redirect, reverse
+from reviews import forms as reviews_forms
 
 
 class CreateException(Exception):
@@ -41,8 +42,11 @@ class ReservationDetailView(View):
             and self.request.user != reservation.room.host
         ):
             raise Http404()
+        form = reviews_forms.CreateReviewForm()
         return render(
-            self.request, "reservations/detail.html", {"reservation": reservation}
+            self.request,
+            "reservations/detail.html",
+            {"reservation": reservation, "form": form},
         )
 
 
