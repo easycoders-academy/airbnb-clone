@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load is_booked %}
-{% load i18n %} 
+{% load is_booked on_favs i18n %}
 
 {% block page_name %} All Rooms {% endblock page_name %} 
 
@@ -11,7 +10,12 @@
         <h2 class="text-gray-600 underline font-medium text-sm w-9/12">{{room.city}}, {{room.country}}</h2>
         <div class="flex justify-around w-3/12">
             <span class="btn__link p-2 rounded-lg hover:bg-gray-100"><i class="fas fa-external-link-alt mr-2"></i>Поделиться</span>
-            <a class="btn__link p-2 rounded-lg hover:bg-gray-100" href="{% url 'lists:save-room' room.pk %}"><i class="far fa-heart mr-2"></i>Сохранить</a>
+            {% on_favs room as on_favs_bool %}
+            {% if on_favs_bool %}
+            <a class="btn__link p-2 rounded-lg hover:bg-gray-100" href="{% url 'lists:save-room' room.pk %}"><i class="fas fa-heart mr-2 text-red-600"></i>В закладках</a>
+            {% else %}
+                <a class="btn__link p-2 rounded-lg hover:bg-gray-100" href="{% url 'lists:save-room' room.pk %}"><i class="far fa-heart mr-2"></i>Сохранить</a>
+            {% endif %}    
         </div>
     </div>
     
