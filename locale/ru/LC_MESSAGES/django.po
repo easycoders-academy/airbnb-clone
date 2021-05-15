@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-15 02:23+0300\n"
+"POT-Creation-Date: 2021-05-15 02:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,5 +21,9 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: templates/partials/footer.html:3
+msgid "Copyright"
+msgstr "Копирайт"
+
+#: templates/partials/footer.html:3
 msgid "All rights reserved"
-msgstr ""
+msgstr "Все права защищены"

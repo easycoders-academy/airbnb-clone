@@ -1,4 +1,12 @@
 {% load i18n %}
 <footer class="container mx-auto text-center py-10 border-t">
-    &copy; 2020 Airbnb Clone, Inc. {% trans 'All rights reserved' %}
+    <div class="flex justify-center">
+        {% trans 'Copyright' %} &copy; 2020 Airbnb Clone, Inc. {% trans 'All rights reserved' %}
+    </div>
+    <div class="flex justify-center mt-5">
+        <select class="w-1/5 h-8 p-0" id="js-lang">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
+    </div>
 </footer>

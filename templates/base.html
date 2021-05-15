@@ -29,5 +29,15 @@
     {% block content %} {% endblock content%}
 
     {% include "partials/footer.html" %}
+
+    <script>
+      const langSelect = document.getElementById('js-lang');
+      const langChangeHadler = () => {
+        let selected = langSelect.value;
+        fetch(`{% url 'users:switch-language' %}?language=${selected}`).then(() => window.location.reload());
+      }
+      langSelect.addEventListener('change', langChangeHadler);
+    </script>
+
   </body>
 </html>
