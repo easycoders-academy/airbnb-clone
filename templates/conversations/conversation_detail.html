@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block page_name %} Сообщения {% endblock page_name %} 
+
+{% block content %}
+    <div class="container min-w-full min-h-screen">
+        <div class="min-w-full flex justify-around items-center py-4 bg-gray-100 border-b border-gray-300">
+            {% for participant in conversation.participants.all %}
+                {% if participant != user %}
+                    <div class="flex flex-col">
+                        <span class="font-extrabold">{{participant.first_name}}</span>
+                        <span class="text-xs">Время ответа: 1 час</span>
+                    </div>
+                    <a href="{% url 'users:profile' participant.pk %}" class="btn__link border border-gray-500 hover:border-black px-4 py-2 rounded-full text-xs no-underline">Подробнее</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="w-1/2 mx-auto flex flex-col flex-grow p-10">
+            
+            {% if conversation.messages.count == 0 %}
+                <span>Нет сообщений</span>
+            {% else %}
+                
+                {% for message in conversation.messages.all %}
+                    <div class="mb-5 flex">
+                        <div class="room__host__avatar">{% include 'mixins/user_avatar.html' with user=message.user %}</div>
+                        <div class="flex flex-col w-full ml-4">
+                            <div class="flex flex-row items-baseline">
+                                <span class="font-medium">{{message.user.first_name}}</span>
+                                <span class="ml-2 text-xs text-gray-600">{{message.created}}</span>
+                            </div>
+                            <span>{{message.text}}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+                    
+            {% endif %}
+                
+        </div>
+    </div>
+{% endblock %}
