@@ -4,9 +4,16 @@
         {% trans 'Copyright' %} &copy; 2020 Airbnb Clone, Inc. {% trans 'All rights reserved' %}
     </div>
     <div class="flex justify-center mt-5">
+        {% get_current_language as LANGUAGE_CODE %}
         <select class="w-1/5 h-8 p-0" id="js-lang">
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
+            <option value="en" 
+            {% if LANGUAGE_CODE == 'en' %}
+                selected
+            {% endif %}
+                >English</option>
+            <option value="ru" {% if LANGUAGE_CODE == 'ru' %}
+            selected
+        {% endif %} >Русский</option>
         </select>
     </div>
 </footer>
