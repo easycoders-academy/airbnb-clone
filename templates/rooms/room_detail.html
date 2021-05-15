@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% load is_booked %} 
+{% load is_booked %}
+{% load i18n %} 
 
 {% block page_name %} All Rooms {% endblock page_name %} 
 
@@ -29,7 +30,9 @@
         <div class="w-3/5 flex flex-col">
             <div class="flex-row room__section">
                 <div class="flex flex-col w-2/3">
-                    <h3 class="font-medium text-xl">{{room.room_type}}, хозяин: {{room.host.first_name}}</h3>
+                    <h3 class="font-medium text-xl">
+                        {% blocktrans with type=room.room_type host=room.host.first_name %}{{type}}, хозяин: {{host}}{% endblocktrans %}
+                    </h3>
                     <span>{{room.guests}} гостей · {{room.beds}} кроватей · {{room.bathrooms}} ванных комнат</span>
                 </div>
                 <div class="flex justify-end w-1/3">

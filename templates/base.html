@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +20,7 @@
       <div class="p-6 w-1/5">
         {% block search-bar %}
              <form method='get' action='{% url "rooms:search" %}'>
-                <input class="search-box border rounded-full px-5 py-3 w-full hover:shadow-md text-sm font-medium placeholder-gray-900" name='city' placeholder='Поиск по городу' />
+                <input class="search-box border rounded-full px-5 py-3 w-full hover:shadow-md text-sm font-medium placeholder-gray-900" name='city' placeholder='{% trans "Поиск по городу" %}' />
             </form>
         {% endblock search-bar %}
       </div>

@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.conf import settings
+from django.utils.translation import gettext as _
 from . import forms, models, mixins
 
 
@@ -39,7 +40,7 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
 
 def log_out(request):
     logout(request)
-    messages.info(request, "До встречи!")
+    messages.info(request, _("До встречи!"))
     return redirect(reverse("core:home"))
 
 

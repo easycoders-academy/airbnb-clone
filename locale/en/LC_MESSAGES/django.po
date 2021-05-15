@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-15 16:31+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/base.html:22
+msgid "Поиск по городу"
+msgstr "Search by city"
+
+#: templates/partials/footer.html:4
+msgid "Копирайт"
+msgstr "Copyright"
+
+#: templates/partials/footer.html:4
+msgid "Все права защищены"
+msgstr "All rights reserved"
+
+#: templates/partials/nav.html:8
+msgid "Хост"
+msgstr "Host"
+
+#: templates/partials/nav.html:10
+msgid "Гость"
+msgstr "Guest"
+
+#: templates/partials/nav.html:16
+msgid "Разместить жилье"
+msgstr "Add room"
+
+#: templates/partials/nav.html:18
+msgid "Профиль"
+msgstr "Profile"
+
+#: templates/partials/nav.html:19
+msgid "Выйти"
+msgstr "Logout"
+
+#: templates/partials/nav.html:21
+msgid "Войти в аккаунт"
+msgstr "Login"
+
+#: templates/partials/nav.html:22
+msgid "Регистрация"
+msgstr "Create account"
+
+#: templates/rooms/room_detail.html:34
+#, python-format
+msgid "%(type)s, хозяин: %(host)s"
+msgstr "%(type)s, host: %(host)s"
+
+#: users/models.py:22
+msgid "Мужчина"
+msgstr "Male"
+
+#: users/models.py:23
+msgid "Женщина"
+msgstr "Female"
+
+#: users/models.py:24
+msgid "Другое"
+msgstr "Other"
+
+#: users/models.py:39
+msgid "Доллар США"
+msgstr "USD"
+
+#: users/models.py:40
+msgid "Российский рубль"
+msgstr "RUB"
+
+#: users/models.py:51
+msgid "Пол"
+msgstr "Gender"
+
+#: users/models.py:53
+msgid "О себе"
+msgstr "Bio"
+
+#: users/models.py:61
+msgid "Суперхост"
+msgstr "Superhost"
+
+#: users/views.py:43
+msgid "До встречи!"
+msgstr "Bye bye!"

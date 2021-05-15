@@ -1,24 +1,25 @@
+{% load i18n %}
     <ul class="flex items-center text-sm font-medium w-2/5 justify-end	">
         {% if user.is_authenticated %}
             <li>
                 <a class="navlink" href="{% url 'users:switch-hosting' %}">
                     
                     {% if request.session.is_hosting %}
-                        Хост
+                        {% trans 'Хост'%}
                     {% else %}
-                        Гость
+                        {% trans 'Гость'%}
                     {% endif %}
                         
                 </a>
             </li>
             {% if request.session.is_hosting %}
-                <li><a class="navlink" href="{% url 'rooms:create' %}">Разместить жилье</a></li>
+                <li><a class="navlink" href="{% url 'rooms:create' %}">{% trans 'Разместить жилье'%}</a></li>
             {% endif %}
-            <li><a class="navlink" href="{{user.get_absolute_url}}">Профиль</a></li>
-            <li ><a class="navlink" href="{% url "users:logout" %}">Выйти</a></li>
+            <li><a class="navlink" href="{{user.get_absolute_url}}">{% trans 'Профиль'%}</a></li>
+            <li ><a class="navlink" href="{% url "users:logout" %}">{% trans 'Выйти'%}</a></li>
         {% else %}
-        <li ><a class="navlink" href="{% url "users:login" %}">Войти в аккаунт</a></li>
-        <li ><a class="navlink" href="{% url "users:signup" %}">Регистрация</a></li>
+        <li ><a class="navlink" href="{% url "users:login" %}">{% trans 'Войти в аккаунт'%}</a></li>
+        <li ><a class="navlink" href="{% url "users:signup" %}">{% trans 'Регистрация'%}</a></li>
         {% endif %}
     </ul>
 
