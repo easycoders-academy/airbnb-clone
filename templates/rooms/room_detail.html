@@ -11,7 +11,7 @@
         <h2 class="text-gray-600 underline font-medium text-sm w-9/12">{{room.city}}, {{room.country}}</h2>
         <div class="flex justify-around w-3/12">
             <span class="btn__link p-2 rounded-lg hover:bg-gray-100"><i class="fas fa-external-link-alt mr-2"></i>Поделиться</span>
-            <span class="btn__link p-2 rounded-lg hover:bg-gray-100"><i class="far fa-heart mr-2"></i>Сохранить</span>
+            <a class="btn__link p-2 rounded-lg hover:bg-gray-100" href="{% url 'lists:save-room' room.pk %}"><i class="far fa-heart mr-2"></i>Сохранить</a>
         </div>
     </div>
     
