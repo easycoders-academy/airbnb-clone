@@ -55,7 +55,7 @@
 
             <div class="room__section">
                 <span>{{room.description}}</span>
-                <a href="#" class="btn__link text-base my-5">Связаться с хозяином</a>
+                <a href="{% url 'conversations:go' room.host.pk user.pk %}" class="btn__link text-base my-5">Связаться с хозяином</a>
             </div>
 
             <div class="room__section">
