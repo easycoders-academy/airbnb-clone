@@ -35,7 +35,12 @@
                 {% endfor %}
                     
             {% endif %}
-                
+            
+            <form method="POST">
+                {% csrf_token %}
+                {{form.message}}
+                <input type="submit" hidden />
+            </form>
         </div>
     </div>
 {% endblock %}
