@@ -11,7 +11,7 @@ from core import managers as core_managers
 
 # Create your models here.
 class User(AbstractUser):
-    """ Кастомная модель пользователя """
+    """Кастомная модель пользователя"""
 
     REQUIRED_FIELDS = ()
 
@@ -66,7 +66,7 @@ class User(AbstractUser):
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
 
-    objects = core_managers.CustomModelManager()
+    objects = core_managers.CustomUserManager()
 
     def get_absolute_url(self):
         return reverse("users:profile", kwargs={"pk": self.pk})
