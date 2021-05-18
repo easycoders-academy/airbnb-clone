@@ -18,3 +18,5 @@ pillow
 psycopg2==2.8.6
 requests
 sentry-sdk
+django-storages
+boto3
