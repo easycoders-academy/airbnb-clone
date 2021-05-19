@@ -153,7 +153,7 @@ class VK_Exception(Exception):
 
 def vk_login(request):
     client_id = os.environ.get("VK_APP_ID")
-    redirect_uri = f"http://127.0.0.1:8000/users/login/vk/callback"
+    redirect_uri = f"http://airbnb-clone-dev.eba-sukptqsc.eu-central-1.elasticbeanstalk.com/users/login/vk/callback"
     return redirect(
         f"https://oauth.vk.com/authorize?client_id={client_id}&display=page&redirect_uri={redirect_uri}&scope=email&response_type=code&v=5.124"
     )
@@ -164,7 +164,7 @@ def vk_callback(request):
         code = request.GET.get("code", None)
         client_id = os.environ.get("VK_APP_ID")
         client_secret = os.environ.get("VK_SECRET")
-        redirect_uri = f"http://127.0.0.1:8000/users/login/vk/callback"
+        redirect_uri = f"http://airbnb-clone-dev.eba-sukptqsc.eu-central-1.elasticbeanstalk.com/users/login/vk/callback"
         if code is not None:
             token_request = requests.get(
                 f"https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}"
